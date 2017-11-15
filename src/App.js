@@ -21,7 +21,9 @@ function send_post(url, value) {
 class Border extends Component {
   render() {
     return (
-      this.props.children
+      <div className="Border">
+        this.props.children
+      </div>
     )
   }
 }
@@ -43,14 +45,14 @@ class Album extends Component {
     var data = this.props
     console.log("rendering",data.title)
     return (
-      <div>
+      <Border style={{height:300,width:300}}>
           <p style={{color:"white",background:"rgba(50,50,50,0.5)"}}>
             {data.title}
             <br/><br/>{data.artist} - {data.year}
             <br/>Tracks: {data.trackCount}
             </p>
         <img src={data.coverArt} className="coverArt" />        
-      </div>
+      </Border>
     )
   }
 }
@@ -58,11 +60,12 @@ class Album extends Component {
 class Artist extends Component {
   constructor(props) {
     super(props)
-    this.state = {albums:[]}
+    this.state = {albums:[], status:"Getting albums"}
     send_post("https://itunes.apple.com/lookup?id="+this.props.artistId+"&entity=album")
       .then(results => JSON.parse(results).results.slice(1))
       .then(albums => this.setState({albums: albums}))
-      .catch(console.log)
+      .then(this.setState({status: ""}))
+      .catch(x => this.setState({status:""+x}))
   }
   render() {
     console.log("rendering",this.props.artistName)
@@ -71,15 +74,15 @@ class Artist extends Component {
         <header className="App-header">
           <h1 className="title">{this.props.artistName}</h1>
           <p className="contents">{this.props.contents}</p>
-          {
-              (this.state.albums.length === 0)?(<p key="0">Getting albums...</p>):(<p/>)
-          }
+          <p key="status">{this.state.status}</p>
         </header>
+        <div className="albumHolder">
         { 
           this.state.albums.map(album => {
-            return <div className="Border">{albumConstructor(album)}</div>
+            return albumConstructor(album)
           })
         }
+        </div>
       </div>
    )
   }
