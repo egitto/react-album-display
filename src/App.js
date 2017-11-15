@@ -13,14 +13,33 @@ function send_post(url, value) {
   })
 }
 
+class Border extends Component {
+  render() {
+    {this.props.children}
+  }
+}
+
+function albumConstructor(album){
+  return (
+    <Album 
+      key={album.collectionId} 
+      coverArt={album.artworkUrl100} 
+      title={album.collectionName} 
+      year={album.releaseDate.slice(0,4)}
+      artist={album.artistName} 
+      trackCount={album.trackCount}/>
+  )
+}
+
 class Album extends Component {
   render() {
-    var data = this.props.data
-    console.log("rendering",this.props.title)
+    var data = this.props
+    console.log("rendering",data.title)
     return (
       <div>
-        <p>{data.collectionName} - {data.releaseDate.slice(0,4)}</p>
-        <img src={data.artworkUrl100} className="albumImage" />
+        <p>{data.title} - {data.year}</p>
+        <p>Tracks: {data.trackCount}</p>
+        <img src={data.coverArt} className="coverArt" />
       </div>
     )
   }
@@ -45,15 +64,13 @@ class Artist extends Component {
         <p className="contents">{this.props.contents}</p>
         {
           [0].map(x => {
-            return (this.state.albums.length === 0)?(<p>Getting albums...</p>):(<p/>);
+            return (this.state.albums.length === 0)?(<p>Getting albums...</p>):(<p/>)
           })
         }
       </header>
         { 
           this.state.albums.map(album => {
-            return (
-              <Album key={album.collectionId} data={album} />
-            )
+            return albumConstructor(album)
           })
         }
       </div>
