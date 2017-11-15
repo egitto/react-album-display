@@ -4,6 +4,11 @@ import './App.css'
 // var Promise = require('bluebird') // I only need this for Promise.map and Promise.all
 var request = require('request')
 
+const divStyle = {
+  WebkitTransition: 'all',
+  msTransition: 'all' 
+}
+
 function send_post(url, value) {
   return new Promise((resolve, reject) => {
     request.post(url, value, (err, response, body) => {
@@ -15,7 +20,9 @@ function send_post(url, value) {
 
 class Border extends Component {
   render() {
-    {this.props.children}
+    return (
+      this.props.children
+    )
   }
 }
 
@@ -37,9 +44,12 @@ class Album extends Component {
     console.log("rendering",data.title)
     return (
       <div>
-        <p>{data.title} - {data.year}</p>
-        <p>Tracks: {data.trackCount}</p>
-        <img src={data.coverArt} className="coverArt" />
+          <p style={{color:"white",background:"rgba(50,50,50,0.5)"}}>
+            {data.title}
+            <br/><br/>{data.artist} - {data.year}
+            <br/>Tracks: {data.trackCount}
+            </p>
+        <img src={data.coverArt} className="coverArt" />        
       </div>
     )
   }
@@ -58,19 +68,16 @@ class Artist extends Component {
     console.log("rendering",this.props.artistName)
     return (
       <div>
-      <header className="App-header">
-        <img src={logo} className="App-logo"/>
-        <h1 className="title">{this.props.artistName}</h1>
-        <p className="contents">{this.props.contents}</p>
-        {
-          [0].map(x => {
-            return (this.state.albums.length === 0)?(<p>Getting albums...</p>):(<p/>)
-          })
-        }
-      </header>
+        <header className="App-header">
+          <h1 className="title">{this.props.artistName}</h1>
+          <p className="contents">{this.props.contents}</p>
+          {
+              (this.state.albums.length === 0)?(<p key="0">Getting albums...</p>):(<p/>)
+          }
+        </header>
         { 
           this.state.albums.map(album => {
-            return albumConstructor(album)
+            return <div className="Border">{albumConstructor(album)}</div>
           })
         }
       </div>

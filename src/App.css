@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #222;
-  height: 160px;
+  height: 110px;
   padding: 30px;
   color: white;
 }
@@ -20,6 +20,20 @@
 
 .App-intro {
   font-size: large;
+}
+
+.Border {
+  text-align: center;
+  margin: 10px;
+  display: inline-flex;
+  font-size: 1em;
+  line-height: 1em;
+  width: 280px;
+  height: 280px;
+  background-color: #CCC;
+/*  border-style: dashed;
+  border-width: thin;
+  border-color: #333; */
 }
 
 @keyframes App-logo-spin {
