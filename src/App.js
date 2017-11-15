@@ -18,7 +18,10 @@ class Album extends Component {
     var data = this.props.data
     console.log("rendering",this.props.title)
     return (
-      <p>{data.collectionName} - {data.releaseDate.slice(0,4)}</p>
+      <div>
+        <p>{data.collectionName} - {data.releaseDate.slice(0,4)}</p>
+        <img src={data.artworkUrl100} className="albumImage" />
+      </div>
     )
   }
 }
@@ -35,7 +38,9 @@ class Artist extends Component {
   render() {
     console.log("rendering",this.props.artistName)
     return (
-      <div className={this.props.artistName}>
+      <div>
+      <header className="App-header">
+        <img src={logo} className="App-logo"/>
         <h1 className="title">{this.props.artistName}</h1>
         <p className="contents">{this.props.contents}</p>
         {
@@ -43,6 +48,7 @@ class Artist extends Component {
             return (this.state.albums.length === 0)?(<p>Getting albums...</p>):(<p/>);
           })
         }
+      </header>
         { 
           this.state.albums.map(album => {
             return (
@@ -59,13 +65,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo"/>
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
         <Artist artistId="20006408" artistName="Regina Spektor" contents="A list of albums released by Regina Spektor"/>
       </div>
     )
