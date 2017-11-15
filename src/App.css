@@ -25,19 +25,47 @@
 .Border {
   text-align: center;
   margin: 10px;
-  display: inline-flex;
-  font-size: 1em;
-  line-height: 1em;
+  display: inline-block;
+  vertical-align: top;
   width: 280px;
   height: 280px;
-  background-color: #CCC;
+  background-color: #CCE;
+  border-radius: 8px;
+  position: relative;
 /*  border-style: dashed;
   border-width: thin;
   border-color: #333; */
 }
 
-.albumHolder {
-  display: inline-flex;
+.UpperLabel {
+  position: absolute;
+  z-index: 1;
+  width: 280px;
+  color: white;
+  display: block;
+  text-align: center;
+  margin-top: 0px;
+  border-radius: 8px 8px 0px 0px;
+  font-size: 1em;
+  background: rgba(50,50,50,0.5);
+}
+
+.CoverArt {
+  vertical-align: top;
+  display: block;
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  height: 100px;
+  margin-top: -50px;
+}
+
+
+.AlbumHolder {
+  display: block;
+  width: 100%;
 }
 
 @keyframes App-logo-spin {

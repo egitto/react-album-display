@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import axios from 'axios'
 // var Promise = require('bluebird') // I only need this for Promise.map and Promise.all
 var request = require('request')
 
@@ -22,7 +23,7 @@ class Border extends Component {
   render() {
     return (
       <div className="Border">
-        this.props.children
+        {this.props.children}
       </div>
     )
   }
@@ -45,13 +46,14 @@ class Album extends Component {
     var data = this.props
     console.log("rendering",data.title)
     return (
-      <Border style={{height:300,width:300}}>
-          <p style={{color:"white",background:"rgba(50,50,50,0.5)"}}>
-            {data.title}
-            <br/><br/>{data.artist} - {data.year}
-            <br/>Tracks: {data.trackCount}
-            </p>
-        <img src={data.coverArt} className="coverArt" />        
+      <Border>
+          <p className="UpperLabel">
+            {data.title}<br/>
+            <br/>
+            {data.artist} - {data.year}<br/>
+            Tracks: {data.trackCount}
+          </p>
+        <img src={data.coverArt} className="CoverArt" />        
       </Border>
     )
   }
@@ -60,12 +62,15 @@ class Album extends Component {
 class Artist extends Component {
   constructor(props) {
     super(props)
-    this.state = {albums:[], status:"Getting albums"}
-    send_post("https://itunes.apple.com/lookup?id="+this.props.artistId+"&entity=album")
-      .then(results => JSON.parse(results).results.slice(1))
+    this.state = {albums:[], status:"getting albums",permitSingles:false,permitCollaboration:false}
+  }
+  componentDidMount(){
+    // console.log("https://itunes.apple.com/lookup?id="+this.props.artistId+"&entity=album")
+    axios.get("https://itunes.apple.com/lookup?id="+this.props.artistId+"&entity=album")
+      .then(results => {console.log(results.data); return results.data.results.slice(1)})
       .then(albums => this.setState({albums: albums}))
-      .then(this.setState({status: ""}))
-      .catch(x => this.setState({status:""+x}))
+      .then(this.setState({status:"albums loaded"}))
+      .catch(e => {this.setState({status:""+e}); console.log(e)})
   }
   render() {
     console.log("rendering",this.props.artistName)
@@ -74,12 +79,14 @@ class Artist extends Component {
         <header className="App-header">
           <h1 className="title">{this.props.artistName}</h1>
           <p className="contents">{this.props.contents}</p>
-          <p key="status">{this.state.status}</p>
+          <p key="status">Status: {this.state.status}</p>
         </header>
         <div className="albumHolder">
         { 
           this.state.albums.map(album => {
-            return albumConstructor(album)
+            if ((this.state.permitSingles || album.trackCount > 1) &&
+               (this.state.permitCollaboration || album.artistName === this.props.artistName))
+              {return albumConstructor(album)}
           })
         }
         </div>
