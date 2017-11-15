@@ -18,7 +18,7 @@ class Album extends Component {
     var data = this.props.data
     console.log("rendering",this.props.title)
     return (
-      <p>{data.collectionName} - {data.releaseDate.getFullYear()}</p>
+      <p>{data.collectionName} - {data.releaseDate.slice(0,4)}</p>
     )
   }
 }
@@ -26,7 +26,7 @@ class Album extends Component {
 class Artist extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {albums:[]}
     send_post("https://itunes.apple.com/lookup?id="+this.props.artistId+"&entity=album")
       .then(results => JSON.parse(results).results.slice(1))
       .then(albums => this.setState({albums: albums}))
@@ -37,13 +37,13 @@ class Artist extends Component {
     return (
       <div className={this.props.artistName}>
         <h1 className="title">{this.props.artistName}</h1>
-        <p className="contents">{this.props.contents + " "+this.state.albums.length}</p>
+        <p className="contents">{this.props.contents}</p>
+        {
+          [0].map(x => {
+            return (this.state.albums.length === 0)?(<p>Getting albums...</p>):(<p/>);
+          })
+        }
         { 
-          if (!this.state.albums){
-            return (
-              <p>Getting albums...</p>
-            )
-          }
           this.state.albums.map(album => {
             return (
               <Album key={album.collectionId} data={album} />
@@ -66,7 +66,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Artist artistId="20006408" artistName="Regina Spektor" contents="contents"/>
+        <Artist artistId="20006408" artistName="Regina Spektor" contents="A list of albums released by Regina Spektor"/>
       </div>
     )
   }
