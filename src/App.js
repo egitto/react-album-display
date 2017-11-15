@@ -75,13 +75,17 @@ class Artist extends Component {
   render() {
     console.log("rendering",this.props.artistName)
     return (
-      <div>
+      <div className="Artist">
         <header className="App-header">
           <h1 className="title">{this.props.artistName}</h1>
           <p className="contents">{this.props.contents}</p>
           <p key="status">Status: {this.state.status}</p>
+          <div className="ToggleButtons">
+            <p onClick={x => this.setState({permitSingles:!this.state.permitSingles})}>Toggle Singles</p>
+            <p onClick={x => this.setState({permitCollaboration:!this.state.permitCollaboration})}>Toggle Collaboration</p>
+          </div>
         </header>
-        <div className="albumHolder">
+        <div className="AlbumHolder">
         { 
           this.state.albums.map(album => {
             if ((this.state.permitSingles || album.trackCount > 1) &&
