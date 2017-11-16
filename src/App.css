@@ -25,7 +25,7 @@
 .AlbumArtist {
   width: 100%;
   margin: 0px;
-  padding: 0px;
+  /*padding: 0px;*/
   position: absolute;
   bottom: 0px;
   background-color: rgba(0,0,0,0.7);
@@ -34,9 +34,9 @@
 }
 
 .AlbumTitle {
-  position: absolute;
   width: 100%;
   margin: 0px;
+  position: absolute;
   background-color: rgba(0,0,0,0.7);
   vertical-align: top;
   border-radius: 8px 8px 0px 0px;
@@ -109,12 +109,19 @@ a {
 .ButtonHolder{
   font-size: 0.8em;
   width: 250px;
+  height: 70px;
   z-index: 10;
   position: absolute;
   display: block;
   top: 10px;
   left: 10px;
   background: rgba(50,50,50,0.3);
+}
+
+button {
+  width: 90%;
+  height: auto;
+  margin: 3px;
 }
 
 .Artist {

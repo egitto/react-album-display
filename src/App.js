@@ -107,9 +107,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Artist artistId="20006408" artistName="Regina Spektor" contents="A list of albums released by Regina Spektor"/>
-        {//<Artist artistId="551695" artistName="David Bowie" contents="A list of albums released by David Bowie"/>
-        }
+        {//<Artist artistId="20006408" artistName="Regina Spektor" contents="A list of albums released by Regina Spektor"/>
+      }
+        <Artist artistId="551695" artistName="David Bowie" contents="A list of albums released by David Bowie"/> 
       </div>
     )
   }
