@@ -1,17 +1,6 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import axios from 'axios'
-var request = require('request')
-
-function send_post(url, value) {
-  return new Promise((resolve, reject) => {
-    request.post(url, value, (err, response, body) => {
-        err && reject(err, response)
-        body && resolve(body)
-    })
-  })
-}
 
 class Border extends Component {
   render() {
@@ -41,13 +30,13 @@ class Album extends Component {
     console.log("rendering",data.title)
     return (
       <Border>
-          <p className="UpperLabel">
+          <p className="AlbumLabel">
             {data.title}<br/>
             <br/>
             {data.artist} - {data.year}<br/>
             Tracks: {data.trackCount}
           </p>
-        <img src={data.coverArt} className="CoverArt" />        
+        <img src={data.coverArt} className="CoverArt" alt={"Cover of "+data.title} />        
       </Border>
     )
   }
@@ -84,13 +73,13 @@ class Artist extends Component {
           </div>
         </header>
         <div className="AlbumHolder">
-        { 
-          this.state.albums.map(album => {
-            if ((this.state.permitSingles || album.trackCount > 1) &&
-               (this.state.permitCollaboration || album.artistName === this.props.artistName))
-              {return albumConstructor(album)}
-          })
-        }
+          { 
+            this.state.albums.map(album => {
+              if ((this.state.permitSingles || album.trackCount > 1) &&
+                 (this.state.permitCollaboration || album.artistName === this.props.artistName))
+                {return albumConstructor(album)}
+            })
+          }
         </div>
       </div>
    )
