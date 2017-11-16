@@ -30,13 +30,11 @@ class Album extends Component {
     console.log("rendering",data.title)
     return (
       <Border>
-          <p className="AlbumLabel">
-            {data.title}<br/>
-            <br/>
-            {data.artist} - {data.year}<br/>
-            Tracks: {data.trackCount}
-          </p>
-        <img src={data.coverArt} className="CoverArt" alt={"Cover of "+data.title} />        
+        <p className="AlbumLabel">
+          <p className="AlbumTitle">{data.title}</p>
+          <p className="AlbumArtist">Tracks: {data.trackCount}<br/>{data.artist} - {data.year}</p>
+        </p>
+        <img src={data.coverArt} className="CoverArt" alt={"Cover of "+data.title} />    
       </Border>
     )
   }
@@ -60,7 +58,7 @@ class Artist extends Component {
     return (
       <div className="Artist">
         <header className="App-header">
-          <h1 className="title">{this.props.artistName}</h1>
+          <h1 className="App-title">{this.props.artistName}</h1>
           <p className="contents">{this.props.contents}</p>
           <p key="status">Status: {this.state.status}</p>
           <div className="ButtonHolder">
