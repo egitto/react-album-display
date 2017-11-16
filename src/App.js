@@ -2,13 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import axios from 'axios'
-// var Promise = require('bluebird') // I only need this for Promise.map and Promise.all
 var request = require('request')
-
-const divStyle = {
-  WebkitTransition: 'all',
-  msTransition: 'all' 
-}
 
 function send_post(url, value) {
   return new Promise((resolve, reject) => {
@@ -80,9 +74,13 @@ class Artist extends Component {
           <h1 className="title">{this.props.artistName}</h1>
           <p className="contents">{this.props.contents}</p>
           <p key="status">Status: {this.state.status}</p>
-          <div className="ToggleButtons">
-            <p onClick={x => this.setState({permitSingles:!this.state.permitSingles})}>Toggle Singles</p>
-            <p onClick={x => this.setState({permitCollaboration:!this.state.permitCollaboration})}>Toggle Collaboration</p>
+          <div className="ButtonHolder">
+            <button type="button" 
+              onClick={x => this.setState({permitSingles:!this.state.permitSingles})}
+              >Toggle Singles</button>
+            <button type="button" 
+              onClick={x => this.setState({permitCollaboration:!this.state.permitCollaboration})}
+              >Toggle Collaboration</button>
           </div>
         </header>
         <div className="AlbumHolder">
