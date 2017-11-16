@@ -51,7 +51,7 @@ class Album extends Component {
         <a className="AlbumLabel">
           <p className="AlbumTitle">{data.title}<br/>
           <a href={data.collectionViewUrl}>${data.collectionPrice}</a></p>
-          <p className="AlbumArtist">Tracks: {data.trackCount}<br/>{data.artist} - {data.year}</p>
+          <p className="AlbumArtist">Tracks: {data.trackCount}<br/>{data.year} - {data.artist}</p>
         </a>
         <img src={data.coverArt} className="CoverArt" alt={"Cover of "+data.title} />    
       </Border>
