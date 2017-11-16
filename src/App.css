@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url(https://raw.githubusercontent.com/egitto/react-album-display/master/public/background.jpg);
+  background-image: url(background.jpg);
   background-attachment: fixed;
   background-color: #422;
 }
