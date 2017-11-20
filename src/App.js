@@ -62,14 +62,12 @@ class Album extends Component {
 class Artist extends Component {
   constructor(props) {
     super(props)
-    this.state = {albums:[], status:"getting albums",permitSingles:false,permitCollaboration:false}
+    this.state = {albums:[], status:"loading albums",permitSingles:true,permitCollaboration:true}
   }
   componentDidMount(){
-    // console.log("https://itunes.apple.com/lookup?id="+this.props.artistId+"&entity=album")
     axios.get("https://itunes.apple.com/lookup?id="+this.props.artistId+"&entity=album")
-      .then(results => {console.log(results.data); return results.data.results.slice(1)})
-      .then(albums => this.setState({albums: albums}))
-      .then(this.setState({status:"albums loaded"}))
+      .then(results => results.data.results.slice(1))
+      .then(albums => {this.setState({albums:albums, status:albums.length+" albums loaded"}); return})
       .catch(e => {this.setState({status:""+e}); console.log(e)})
   }
   render() {
@@ -95,6 +93,7 @@ class Artist extends Component {
               if ((this.state.permitSingles || album.trackCount > 1) &&
                  (this.state.permitCollaboration || album.artistName === this.props.artistName))
                 {return albumConstructor(album)}
+              else {return}
             })
           }
         </div>
@@ -107,9 +106,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {//<Artist artistId="20006408" artistName="Regina Spektor" contents="A list of albums released by Regina Spektor"/>
-      }
-        <Artist artistId="551695" artistName="David Bowie" contents="A list of albums released by David Bowie"/> 
+        <Artist artistId="20006408" artistName="Regina Spektor" contents="A list of albums released by Regina Spektor"/>
+        {//<<Artist artistId="551695" artistName="David Bowie" contents="A list of albums released by David Bowie"/> 
+        }
       </div>
     )
   }

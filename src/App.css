@@ -23,33 +23,28 @@
 }
 
 .AlbumArtist {
-  width: 100%;
-  margin: 0px;
-  /*padding: 0px;*/
-  position: absolute;
   bottom: 0px;
-  background-color: rgba(0,0,0,0.7);
-  vertical-align: bottom;
   border-radius: 0px 0px 8px 8px;
 }
 
 .AlbumTitle {
+  top: 0px;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.AlbumLabel p {
   width: 100%;
   margin: 0px;
   position: absolute;
   background-color: rgba(0,0,0,0.7);
-  vertical-align: top;
-  border-radius: 8px 8px 0px 0px;
-}
-
-.AlbumLabel:hover{
-  opacity: 1;
-  /*color: #211;  */
-  /*background-color: rgba(255,200,200,0.7);*/
 }
 
 a {
   color: inherit;
+}
+
+.AlbumLabel:hover{
+  opacity: 1;
 }
 
 .AlbumLabel {
@@ -62,11 +57,7 @@ a {
   height: 100%;
   left:   0px;
   color: #CAA;
-  display: table-cell;
   text-align: left;
-  margin: 0px;
-  padding: 0px;
-  /*background-color: rgba(0,0,0,0.7);*/
   border-radius: 8px 8px 0px 0px;
 }
 
@@ -77,33 +68,23 @@ a {
   z-index: 0;
   top: 10px;
   left: 10px;
-  border-radius: 8px;
+  border-radius: 0px;
   height: calc(100% - 20px);
   width: calc(100% - 20px);
-  /*margin-top: -50px;*/
 }
 
 .Border {
   margin: 10px;
   display: inline-block;
-  vertical-align: top;
-  max-width: 400px;
-  max-height: 400px;
-  min-width: 200px;
-  min-height: 200px;
+  /*vertical-align: top;*/
   width: 300px;
   height: 300px;
-  background-color: rgba(160,100,100,0.8);
+  background-color: rgba(160,100,100,0.5);
   border-radius: 8px;
   position: relative;
-/*  border-style: dashed;
-  border-width: thin;
-  border-color: #333; */
 }
 
 .AlbumHolder {
-  display: block;
-  width: 100%;
 }
 
 .ButtonHolder{
