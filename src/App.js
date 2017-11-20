@@ -81,10 +81,10 @@ class Artist extends Component {
           <div className="ButtonHolder">
             <button type="button" 
               onClick={x => this.setState({permitSingles:!this.state.permitSingles})}
-              >Toggle Singles</button>
+              >{this.state.permitSingles?"Hide":"Show"} Singles</button>
             <button type="button" 
               onClick={x => this.setState({permitCollaboration:!this.state.permitCollaboration})}
-              >Toggle Collaboration</button>
+              >{this.state.permitCollaboration?"Hide":"Show"} Collaboration</button>
           </div>
         </header>
         <div className="AlbumHolder">

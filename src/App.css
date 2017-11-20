@@ -2,13 +2,13 @@
   text-align: center;
   background-image: url(background.jpg);
   background-attachment: fixed;
-  background-color: #422;
+  background-color: #320F0D;
 }
 
 .App-header {
   background-color: #211;
   height: 160px;
-  padding: 10px;
+  padding: 1px;
   color: #ECC;
   opacity: 0.8;
 }
@@ -16,10 +16,6 @@
 .App-title {
   font-size: 1.7em;
   font: 1.7em Garamond serif;
-}
-
-.App-intro {
-  font-size: large;
 }
 
 .AlbumArtist {
@@ -106,5 +102,4 @@ button {
 }
 
 .Artist {
-  position: relative;
 }
